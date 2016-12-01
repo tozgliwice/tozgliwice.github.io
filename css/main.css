@@ -1,0 +1,127 @@
+/* Baza adopcji */
+#header .title{
+    font-size: 3em;
+    text-align: center;
+    height: 125px;
+}
+#header .subtitle{
+    text-align: center;
+    font-size: 1.3em;
+    padding-top: 40px;
+    vertical-align: bottom;
+    color: #909090;
+}
+
+/* Dogs */
+div.dogs-border {
+    border: 1px solid #bbbbbb;
+    padding: 1em;
+}
+
+div.row {
+    padding-bottom: 1em;
+}
+
+.dogs-listing .dogs-image img{
+    /* max-height:75%; */
+}
+
+.dogs-listing .description p {
+    padding: 1em;
+    color: #777777;
+}
+
+.adoption-ready {
+    text-align: center;
+}
+
+.adoption-ready button{
+    font-size: 0.7em !important;
+    padding: 0.3em !important;
+}
+
+/* Controls */
+
+#side {
+    margin-top: 0px;
+}
+
+#side h2 {
+    color: #909090;
+}
+
+.age-control .age-slider {
+    width: 90%;
+}
+.weight-control .weight-slider {
+    width: 90%;
+}
+
+.partition {
+    color: #999999;
+}
+
+div#loading{
+    padding: 5% 0 0 50%;
+}
+
+img#image-loading{
+    margin-left: 13px !important;
+}
+
+div#loading {
+    padding-bottom: 5em;
+}
+
+#loading .loading-text {
+    color: #999999;
+}
+
+/* Modal */
+.modal-header h3{
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.full-description {
+    padding: 1.5em;
+    text-size: 1.1em;
+}
+
+.full-photo {
+    text-align: center;
+}
+
+.full-specs {
+    text-align: center;
+}
+
+.full-specs .attrib {
+    font-size: 1.2em;
+}
+
+.contact-shelter {
+    padding-top: 1em;
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.contact-shelter .info {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.memory-body {
+    text-align: center;
+}
+
+.memory-body p{
+    padding: 2em;
+}
+
+
+#footer {
+    color: #999999;
+    border-top: 1px solid #dddddd;
+    text-align: center;
+}

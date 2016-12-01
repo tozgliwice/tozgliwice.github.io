@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="rescueMe">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,400italic'>
+		<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
+		<link rel="stylesheet" type="text/css" href="css/ekko-lightbox.min.css">
+		<!--    <link rel="stylesheet" type="text/css" href="css/ekko-lightbox-dark.css"> -->
+		<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+		<link rel="stylesheet" href="css/animations.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/jquery-ui.css">
+
+		<script src="js/jquery.min.js"></script>
+		<!-- <script src="js/bootstrap.min.js"></script> -->
+		<!-- <script src="js/jquery.singlePageNav.min.js"></script> -->
+		<script src="js/sigma.js"></script>
+
+
+
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<script type="text/javascript" src="js/tabletop.js"></script>
+		<script type="text/javascript" src='js/sheetsee.js'></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.18/angular.min.js"></script>
+		<script type="text/javascript" src="js/slider.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-animate.js"></script>
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/ui-bootstrap-tpls-0.11.0.min.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+
+
+
+
+
+		<script type="text/ng-template" id="dogDetail">
+			<div class="modal-header">
+				<h3 class="modal-title">{{dog.name | uppercase}}</h3>
+			</div>
+			<div class="modal-body">
+				<div class="full-photo">
+					<img style="max-width:100%; max-height:50%;" ng-src="{{dog.photourl}}" />
+				</div>
+				<div class="contact-shelter" ng-show="dog.photogallery">
+					<p><a href="{{dog.photogallery}}">Więcej zdjęć tego kotka...</a></p>
+				</div>
+				<div class="full-description">
+					<p>
+						{{dog.description}}
+					</p>
+				</div>
+				<div class="full-specs">
+					<span ng-show="dog.sex"><span class="small">Płeć</span> <span class="attrib sex"><strong>{{dog.sex | uppercase}}</strong></span></span>
+					<span ng-show="dog.weight"><span class="small">Waga</span> <span class="attrib weight"><strong>{{dog.weight}} lbs</strong></span></span>
+					<span ng-show="dog.spayedorneutered"><span class="small">Kastracja/Sterylizacja</span> <span class="attrib spayedorneutered"><strong>{{dog.spayedorneutered | uppercase}}</strong></span></span>
+					<span ng-show="dog.energylevel"><span class="small">Usposobienie</span> <span class="attrib energylevel"><strong>{{dog.energylevel}}</strong></span></span>
+				</div>
+				<div class="full-specs" ng-show="dog.breed">
+					<span class="small">Umaszczenie</span> <span class="attrib breed"><strong>{{dog.breed}}</strong></span>
+				</div>
+				<div class="contact-shelter" ng-show="dog.adoptioncontact">
+					<p>Chcesz adoptować? Skontaktuj się z nami:<br/><span class="info">{{dog.adoptioncontact}}</span></p>
+				</div>
+				<div class="full-intake" ng-show="dog.intakedate">
+					<small>Przyjęty: {{dog.intakedate}}</small>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn" ng-click="$dismiss()">Zamknij</button>
+			</div>
+		</script>
+		<!--
+		Sigma Template
+		http://www.templatemo.com/tm-479-sigma
+		-->
+		<title>Bezpieczna Łapa - Towarzystwo Opieki nad Zwierzętami Odział Gliwice</title>
+	</head>
+	<body ng-controller="RescueMeCtrl">
+		<header id="top">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-4 col-md-12 site-title">
+						<a href="index.html"><img src="images/LogoBezpiecznaLapa.png"  height="100" alt=""/></a>
+					</div>
+					<div class="col-lg-8 col-md-12 main-menu">
+						<nav class="navbar navbar-light">
+							<ul class="nav navbar-nav single-page-nav">
+								<li class="nav-item">
+									<a class="nav-link external" href="adoptions.html">Adopcje <!-- <span class="sr-only">(current)</span> --></a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#gallery">Jak pomóc?</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#news">Aktualności</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#contact">Kontakt</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<hr class="sigma-hr">
+					</div>
+				</div>
+			</div>
+		</header>
+		<section id="adoptions">
+			<div class="container-fluid">
+
+
+
+			<div id="main" class="row" ng-show="loaded">
+				<!-- Display Area -->
+				<div id="content" class="col-xs-10">
+					<div ng-repeat="dog in dogs |
+						filterAttrib:{'keepList':filterByType.breed, 'name': 'breed'} |
+						filterAttrib:{'keepList':filterByType.size, 'name': 'size'}  |
+						filterAttrib:{'keepList':filterByType.sex, 'name': 'sex'} |
+						filterAttrib:{'keepList':filterByType.spayedorneutered, 'name': 'spayedorneutered'} |
+						filterAttrib:{'keepList':filterByType.energylevel, 'name': 'energylevel'} |
+						filterAttrib:{'keepList':filterByType.childfriendly, 'name': 'childfriendly'} |
+						filterAge:age |
+						filterWeight:weight |
+						filter:querydesc">
+						<div ng-class="{row: ($index + 1) % 3 == 0}">
+							<div class="dogs-listing col-xs-4">
+								<div class="dogs-border">
+									<div class="dogs-image">
+										<a href="" ng-click="open(dog)">
+											<img class="img-responsive" ng-src="{{dog.photourl}}" />
+										</a>
+									</div>
+									<div class="dog-details">
+										<div class="dog-name">
+											<h3><a href="" ng-click="open(dog)">{{dog.name}}</a></h3>
+										</div>
+										<div class="specs">
+											<span ng-show="dog.sex"><span class="small">Płeć</span> <span class="sex"><strong>{{dog.sex | uppercase}}</strong></span></span>
+											<span ng-show="dog.breed"><span class="small">Umaszczenie</span> <span class="breed"><strong>{{dog.breed}}</strong></span></span>
+											<span ng-show="dog.weight"><span class="small">Waga</span> <span class="weight"><strong>{{dog.weight}} lbs</strong></span></span>
+											<span ng-show="dog.spayedorneutered"><span class="small">Kastracja/Sterylizacja</span> <span class="weight"><strong>{{dog.spayedorneutered | uppercase}}</strong></span></span>
+											<span ng-show="dog.energylevel"><span class="small">Usposobienie</span> <span class="energylevel"><strong>{{dog.energylevel}}</strong></span></span>
+											<span ng-show="dog.childfriendly"><span class="small">Tylko do adopcji wirtualnej</span> <span class="childfriendly"><strong>{{dog.childfriendly | uppercase}}</strong></span></span>
+										</div>
+										<div class="description"><p><img src="images/quote.png" />{{dog.description | cut:true:50:'...' }}</p></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Selection Toolbar -->
+				<div id="side" class="col-xs-2">
+					<h2>Szukaj...</h2>
+					<div class="age-control form-group">
+						<label for="ageFilter">Wiek</label>
+						<div ui-slider="{range: true}"
+							min="1"
+							max="10"
+							step="1"
+							ng-model="age"
+							id="ageFilter"
+						class="age-slider"></div>
+						<small>Wybrano: {{age[0]}} - {{age[1]}}</small>
+					</div>
+					<div class="weight-control form-group">
+						<label for="weightFilter">Waga</label>
+						<div ui-slider="{range: true}"
+							min="1"
+							max="200"
+							step="1"
+							ng-model="weight"
+							id="weightFilter"
+						class="weight-slider"></div>
+						<small>Wybrano: {{weight[0]}} - {{weight[1]}}</small>
+					</div>
+					<div class="form-group" ng-show="filterByType.breed && filterByType.breed.length !== 0">
+						<label for="breedFilter">Umaszczenie</label>
+						<div id="breedFilter" class="checkbox">
+							<label ng-repeat="breed in filterByType.breed" class="checkbox-inline">
+								<input type="checkbox" ng-model="breed.value"/> {{breed.name | lowercase}}
+							</label>
+						</div>
+						<a href="" ng-click="check(filterByType.breed, true)"><small>All</small></a>
+						<a class="partition"> | </a>
+						<a href="" ng-click="check(filterByType.breed, false)"><small>None</small></a>
+					</div>
+					<div class="form-group" ng-show="filterByType.energylevel && filterByType.energylevel.length !== 0">
+						<label for="energylevelFilter">Usposobienie</label>
+						<div id="energylevelFilter" class="checkbox">
+							<label ng-repeat="energylevel in filterByType.energylevel" class="checkbox-inline">
+								<input type="checkbox" ng-model="energylevel.value"/> {{energylevel.name | uppercase}}
+							</label>
+						</div>
+					</div>
+					<div class="form-group" ng-show="filterByType.childfriendly && filterByType.childfriendly.length !== 0">
+						<label for="childfriendlyFilter">Tylko do adopcji wirtualnej</label>
+						<div id="childfriendlyFilter" class="checkbox">
+							<label ng-repeat="childfriendly in filterByType.childfriendly" class="checkbox-inline">
+								<input type="checkbox" ng-model="childfriendly.value"/> {{childfriendly.name | uppercase}}
+							</label>
+						</div>
+					</div>
+					<div class="form-group" ng-show="filterByType.sex && filterByType.sex.length !== 0">
+						<label for="sexFilter">Płeć</label>
+						<div id="sexFilter" class="checkbox">
+							<label ng-repeat="sex in filterByType.sex" class="checkbox-inline">
+								<input type="checkbox" ng-model="sex.value"/> {{sex.name | uppercase}}
+							</label>
+						</div>
+					</div>
+					<div class="form-group" ng-show="filterByType.spayedorneutered && filterByType.spayedorneutered.length !== 0">
+						<label for="spayedorneuteredFilter">Kastracja/Sterylizacja</label>
+						<div id="spayedorneuteredFilter" class="checkbox">
+							<label ng-repeat="spayedorneutered in filterByType.spayedorneutered" class="checkbox-inline">
+								<input type="checkbox" ng-model="spayedorneutered.value"/> {{spayedorneutered.name | uppercase}}
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<input id="searchField" placeholder="Search by all fields" class="form-control" ng-model="querydesc">
+					</div>
+				</div>
+				</div><!-- #main -->
+				<div id="loading" ng-show="!loaded">
+					<div clas="loading-image"><img id="image-loading" src="images/loading.gif" /></div>
+					<div class="loading-text">Loading ...</div>
+				</div>
+
+
+
+			</div>
+		</section>
+		<footer>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<hr class="sigma-hr">
+					</div>
+				</div>
+				<div class="row">
+					<div class="sigma-copyright col-lg-8">
+						<p>Sigma Bootstrap 4 Theme | design: <a rel="nofollow" href="http://www.templatemo.com" target="_parent">templatemo</a></p>
+					</div>
+					<div class="sigma-copyright col-lg-4 single-page-nav text-right">
+						<p><a href="#top">Do góry</a></p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
